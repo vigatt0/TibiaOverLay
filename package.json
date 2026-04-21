@@ -1,0 +1,43 @@
+{
+  "name": "tibiaoverlay",
+  "version": "1.0.0",
+  "description": "A lightweight transparent game overlay for Tibia, built with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux",
+    "build:mac": "electron-builder --mac"
+  },
+  "keywords": ["tibia", "overlay", "electron", "game"],
+  "author": "TibiaOverLay",
+  "license": "MIT",
+  "dependencies": {
+    "active-win": "^8.1.1"
+  },
+  "devDependencies": {
+    "electron": "^41.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.tibiaoverlay.app",
+    "productName": "TibiaOverLay",
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "style.css",
+      "overlays.json",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    },
+    "mac": {
+      "target": "dmg"
+    }
+  }
+}
