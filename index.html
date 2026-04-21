@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TibiaOverLay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="overlay-container"></div>
+
+  <script>
+    /**
+     * Render overlay images using the safe API exposed by preload.js via
+     * contextBridge – no direct Node.js access in the renderer.
+     */
+    function renderOverlays() {
+      const overlays = window.overlayAPI.getOverlays();
+      const container = document.getElementById('overlay-container');
+      container.innerHTML = '';
+
+      overlays.forEach((item, index) => {
+        const img = document.createElement('img');
+        img.src       = item.src;
+        img.alt       = `overlay-${index}`;
+        img.draggable = false;
+
+        img.style.position    = 'absolute';
+        img.style.left        = `${item.x}px`;
+        img.style.top         = `${item.y}px`;
+        img.style.width       = `${item.width}px`;
+        img.style.height      = `${item.height}px`;
+        img.style.opacity     = item.opacity;
+        img.style.pointerEvents = 'none';
+
+        container.appendChild(img);
+      });
+    }
+
+    renderOverlays();
+  </script>
+</body>
+</html>
